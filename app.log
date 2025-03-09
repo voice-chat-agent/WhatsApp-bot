@@ -1,0 +1,133 @@
+2025-03-09 19:36:17,507 [INFO] Agent executor created successfully.
+2025-03-09 19:36:20,781 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 20:02:51,251 [INFO] -- BEGIN Twilio API Request --
+2025-03-09 20:02:51,252 [INFO] POST Request: https://api.twilio.com/2010-04-01/Accounts/ACbcd2558df196c1765a7bedc63319e3c5/Messages.json
+2025-03-09 20:02:51,252 [INFO] Headers:
+2025-03-09 20:02:51,252 [INFO] Content-Type : application/x-www-form-urlencoded
+2025-03-09 20:02:51,252 [INFO] Accept : application/json
+2025-03-09 20:02:51,252 [INFO] User-Agent : twilio-python/9.4.4 (Linux x86_64) Python/3.12.3
+2025-03-09 20:02:51,252 [INFO] X-Twilio-Client : python-9.4.4
+2025-03-09 20:02:51,252 [INFO] Accept-Charset : utf-8
+2025-03-09 20:02:51,252 [INFO] -- END Twilio API Request --
+2025-03-09 20:02:52,678 [INFO] Response Status Code: 400
+2025-03-09 20:02:52,678 [INFO] Response Headers: {'Content-Type': 'application/json', 'Content-Length': '158', 'Connection': 'keep-alive', 'Date': 'Sun, 09 Mar 2025 20:02:52 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '63007', 'Twilio-Concurrent-Requests': '1', 'Twilio-Request-Id': 'RQd3639f97caf05e57ad9452272bf6020a', 'Twilio-Request-Duration': '0.071', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Expose-Headers': 'ETag, Twilio-Request-Id', 'Access-Control-Allow-Credentials': 'true', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 311b540b2896b95f3dd13864b05aa3fa.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': 'k5H2SvaNjWiFtrV07-nS6Q_AULmzCOVDO2ZPqZfEjYqtW22tURXpVw=='}
+2025-03-09 20:04:57,599 [INFO] -- BEGIN Twilio API Request --
+2025-03-09 20:04:57,599 [INFO] POST Request: https://api.twilio.com/2010-04-01/Accounts/ACbcd2558df196c1765a7bedc63319e3c5/Messages.json
+2025-03-09 20:04:57,599 [INFO] Headers:
+2025-03-09 20:04:57,599 [INFO] Content-Type : application/x-www-form-urlencoded
+2025-03-09 20:04:57,599 [INFO] Accept : application/json
+2025-03-09 20:04:57,599 [INFO] User-Agent : twilio-python/9.4.4 (Linux x86_64) Python/3.12.3
+2025-03-09 20:04:57,599 [INFO] X-Twilio-Client : python-9.4.4
+2025-03-09 20:04:57,599 [INFO] Accept-Charset : utf-8
+2025-03-09 20:04:57,599 [INFO] -- END Twilio API Request --
+2025-03-09 20:04:59,674 [INFO] Response Status Code: 400
+2025-03-09 20:04:59,674 [INFO] Response Headers: {'Content-Type': 'application/json', 'Content-Length': '158', 'Connection': 'keep-alive', 'Date': 'Sun, 09 Mar 2025 20:04:59 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '63007', 'Twilio-Concurrent-Requests': '1', 'Twilio-Request-Id': 'RQ40b2b759235d236871a0164d9092e7b4', 'Twilio-Request-Duration': '0.087', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Expose-Headers': 'ETag, Twilio-Request-Id', 'Access-Control-Allow-Credentials': 'true', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 0587d29bba1a416012edbf0b64a7e34c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': 'elRbjXYuq-2GT9qi1TxfaPddxDWg3pBvnnK3pBdkpdZaNtKkB5GYDg=='}
+2025-03-09 20:08:00,473 [INFO] -- BEGIN Twilio API Request --
+2025-03-09 20:08:00,473 [INFO] POST Request: https://api.twilio.com/2010-04-01/Accounts/ACbcd2558df196c1765a7bedc63319e3c5/Messages.json
+2025-03-09 20:08:00,473 [INFO] Headers:
+2025-03-09 20:08:00,473 [INFO] Content-Type : application/x-www-form-urlencoded
+2025-03-09 20:08:00,473 [INFO] Accept : application/json
+2025-03-09 20:08:00,473 [INFO] User-Agent : twilio-python/9.4.4 (Linux x86_64) Python/3.12.3
+2025-03-09 20:08:00,473 [INFO] X-Twilio-Client : python-9.4.4
+2025-03-09 20:08:00,473 [INFO] Accept-Charset : utf-8
+2025-03-09 20:08:00,473 [INFO] -- END Twilio API Request --
+2025-03-09 20:08:01,005 [INFO] Response Status Code: 400
+2025-03-09 20:08:01,005 [INFO] Response Headers: {'Content-Type': 'application/json', 'Content-Length': '158', 'Connection': 'keep-alive', 'Date': 'Sun, 09 Mar 2025 20:08:01 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '63007', 'Twilio-Concurrent-Requests': '1', 'Twilio-Request-Id': 'RQ5f2ad06e4f463601d9e174b34f5ea1c0', 'Twilio-Request-Duration': '0.083', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Expose-Headers': 'ETag, Twilio-Request-Id', 'Access-Control-Allow-Credentials': 'true', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 0587d29bba1a416012edbf0b64a7e34c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': 'NDe8cCjcrKKypZhZAD58r1LQcvf1AENUc6HdEXyTjVWib2sSHGaMrA=='}
+2025-03-09 20:09:48,737 [INFO] -- BEGIN Twilio API Request --
+2025-03-09 20:09:48,738 [INFO] POST Request: https://api.twilio.com/2010-04-01/Accounts/ACbcd2558df196c1765a7bedc63319e3c5/Messages.json
+2025-03-09 20:09:48,738 [INFO] Headers:
+2025-03-09 20:09:48,738 [INFO] Content-Type : application/x-www-form-urlencoded
+2025-03-09 20:09:48,738 [INFO] Accept : application/json
+2025-03-09 20:09:48,738 [INFO] User-Agent : twilio-python/9.4.4 (Linux x86_64) Python/3.12.3
+2025-03-09 20:09:48,738 [INFO] X-Twilio-Client : python-9.4.4
+2025-03-09 20:09:48,738 [INFO] Accept-Charset : utf-8
+2025-03-09 20:09:48,738 [INFO] -- END Twilio API Request --
+2025-03-09 20:09:50,874 [INFO] Response Status Code: 400
+2025-03-09 20:09:50,874 [INFO] Response Headers: {'Content-Type': 'application/json', 'Content-Length': '158', 'Connection': 'keep-alive', 'Date': 'Sun, 09 Mar 2025 20:09:51 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '63007', 'Twilio-Concurrent-Requests': '1', 'Twilio-Request-Id': 'RQ38a40dc3ca5c2b7d08d68cb0bc8accbb', 'Twilio-Request-Duration': '0.052', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Expose-Headers': 'ETag, Twilio-Request-Id', 'Access-Control-Allow-Credentials': 'true', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 e7158c7eed7a852dfc0a0b538680e072.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': 'Ep8Nz7jDTCn_XuUTjWLPjIjT_l_kpyWJWPL6Mj2NaTEREEOlLfayWw=='}
+2025-03-09 21:00:58,201 [INFO] -- BEGIN Twilio API Request --
+2025-03-09 21:00:58,201 [INFO] POST Request: https://api.twilio.com/2010-04-01/Accounts/ACbcd2558df196c1765a7bedc63319e3c5/Messages.json
+2025-03-09 21:00:58,201 [INFO] Headers:
+2025-03-09 21:00:58,201 [INFO] Content-Type : application/x-www-form-urlencoded
+2025-03-09 21:00:58,201 [INFO] Accept : application/json
+2025-03-09 21:00:58,201 [INFO] User-Agent : twilio-python/9.4.4 (Linux x86_64) Python/3.12.3
+2025-03-09 21:00:58,201 [INFO] X-Twilio-Client : python-9.4.4
+2025-03-09 21:00:58,201 [INFO] Accept-Charset : utf-8
+2025-03-09 21:00:58,201 [INFO] -- END Twilio API Request --
+2025-03-09 21:00:59,654 [INFO] Response Status Code: 400
+2025-03-09 21:00:59,654 [INFO] Response Headers: {'Content-Type': 'application/json', 'Content-Length': '182', 'Connection': 'keep-alive', 'Date': 'Sun, 09 Mar 2025 21:00:59 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '63031', 'Twilio-Concurrent-Requests': '1', 'Twilio-Request-Id': 'RQa160c1ca3a4668e0696d611ce4e552a7', 'Twilio-Request-Duration': '0.064', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Expose-Headers': 'ETag, Twilio-Request-Id', 'Access-Control-Allow-Credentials': 'true', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 fc93b40927ecc3b1d5e4fffeca69b042.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': 'CYkKUOa87HHVTh9SLL3XhW81eW58upthBYdTDHcAFeR0F2pWlXnwlw=='}
+2025-03-09 21:02:17,482 [INFO] -- BEGIN Twilio API Request --
+2025-03-09 21:02:17,483 [INFO] POST Request: https://api.twilio.com/2010-04-01/Accounts/ACbcd2558df196c1765a7bedc63319e3c5/Messages.json
+2025-03-09 21:02:17,483 [INFO] Headers:
+2025-03-09 21:02:17,483 [INFO] Content-Type : application/x-www-form-urlencoded
+2025-03-09 21:02:17,483 [INFO] Accept : application/json
+2025-03-09 21:02:17,483 [INFO] User-Agent : twilio-python/9.4.4 (Linux x86_64) Python/3.12.3
+2025-03-09 21:02:17,483 [INFO] X-Twilio-Client : python-9.4.4
+2025-03-09 21:02:17,483 [INFO] Accept-Charset : utf-8
+2025-03-09 21:02:17,483 [INFO] -- END Twilio API Request --
+2025-03-09 21:02:19,378 [INFO] Response Status Code: 400
+2025-03-09 21:02:19,378 [INFO] Response Headers: {'Content-Type': 'application/json', 'Content-Length': '158', 'Connection': 'keep-alive', 'Date': 'Sun, 09 Mar 2025 21:02:19 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '63007', 'Twilio-Concurrent-Requests': '1', 'Twilio-Request-Id': 'RQ5105c8093b3b24e4548495cffc4a72f2', 'Twilio-Request-Duration': '0.068', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Expose-Headers': 'ETag, Twilio-Request-Id', 'Access-Control-Allow-Credentials': 'true', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 0587d29bba1a416012edbf0b64a7e34c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': 'oVo2Fbm3oz8hNE3aCT6EulKTYI0MNK8rysmcGIFGI3CXXl73LE7xcg=='}
+2025-03-09 21:04:44,799 [INFO] -- BEGIN Twilio API Request --
+2025-03-09 21:04:44,799 [INFO] POST Request: https://api.twilio.com/2010-04-01/Accounts/ACbcd2558df196c1765a7bedc63319e3c5/Messages.json
+2025-03-09 21:04:44,799 [INFO] Headers:
+2025-03-09 21:04:44,799 [INFO] Content-Type : application/x-www-form-urlencoded
+2025-03-09 21:04:44,799 [INFO] Accept : application/json
+2025-03-09 21:04:44,799 [INFO] User-Agent : twilio-python/9.4.4 (Linux x86_64) Python/3.12.3
+2025-03-09 21:04:44,799 [INFO] X-Twilio-Client : python-9.4.4
+2025-03-09 21:04:44,799 [INFO] Accept-Charset : utf-8
+2025-03-09 21:04:44,799 [INFO] -- END Twilio API Request --
+2025-03-09 21:04:46,371 [INFO] Response Status Code: 400
+2025-03-09 21:04:46,372 [INFO] Response Headers: {'Content-Type': 'application/json', 'Content-Length': '158', 'Connection': 'keep-alive', 'Date': 'Sun, 09 Mar 2025 21:04:46 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '63007', 'Twilio-Concurrent-Requests': '1', 'Twilio-Request-Id': 'RQ89642871a910d5677cdb2276a79aa2b6', 'Twilio-Request-Duration': '0.124', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Expose-Headers': 'ETag, Twilio-Request-Id', 'Access-Control-Allow-Credentials': 'true', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 3ed047b9445f29bd769c4848cba712a0.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': 'pw5ysbWm0eAsUwMotVLVImSkApNHqhU5vMvi54TnIrTNHiLqwoFbjg=='}
+2025-03-09 21:06:38,667 [INFO] -- BEGIN Twilio API Request --
+2025-03-09 21:06:38,667 [INFO] POST Request: https://api.twilio.com/2010-04-01/Accounts/ACbcd2558df196c1765a7bedc63319e3c5/Messages.json
+2025-03-09 21:06:38,667 [INFO] Headers:
+2025-03-09 21:06:38,667 [INFO] Content-Type : application/x-www-form-urlencoded
+2025-03-09 21:06:38,667 [INFO] Accept : application/json
+2025-03-09 21:06:38,667 [INFO] User-Agent : twilio-python/9.4.4 (Linux x86_64) Python/3.12.3
+2025-03-09 21:06:38,667 [INFO] X-Twilio-Client : python-9.4.4
+2025-03-09 21:06:38,667 [INFO] Accept-Charset : utf-8
+2025-03-09 21:06:38,667 [INFO] -- END Twilio API Request --
+2025-03-09 21:06:40,660 [INFO] Response Status Code: 400
+2025-03-09 21:06:40,660 [INFO] Response Headers: {'Content-Type': 'application/json', 'Content-Length': '158', 'Connection': 'keep-alive', 'Date': 'Sun, 09 Mar 2025 21:06:40 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '63007', 'Twilio-Concurrent-Requests': '1', 'Twilio-Request-Id': 'RQaf3ae5aa6d3fb2f8381d6ddf929a78ed', 'Twilio-Request-Duration': '0.077', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Expose-Headers': 'ETag, Twilio-Request-Id', 'Access-Control-Allow-Credentials': 'true', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 b0f8455cc4557d0eb768236b7fae9c06.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': '1m_HJP21RhD_91lVz_WUtswnP4yBSW2fudTUwDLSwSE_ZvPRY5-NJg=='}
+2025-03-09 21:21:57,470 [INFO] -- BEGIN Twilio API Request --
+2025-03-09 21:21:57,471 [INFO] POST Request: https://api.twilio.com/2010-04-01/Accounts/ACbcd2558df196c1765a7bedc63319e3c5/Messages.json
+2025-03-09 21:21:57,471 [INFO] Headers:
+2025-03-09 21:21:57,471 [INFO] Content-Type : application/x-www-form-urlencoded
+2025-03-09 21:21:57,471 [INFO] Accept : application/json
+2025-03-09 21:21:57,471 [INFO] User-Agent : twilio-python/9.4.4 (Linux x86_64) Python/3.12.3
+2025-03-09 21:21:57,471 [INFO] X-Twilio-Client : python-9.4.4
+2025-03-09 21:21:57,471 [INFO] Accept-Charset : utf-8
+2025-03-09 21:21:57,471 [INFO] -- END Twilio API Request --
+2025-03-09 21:21:59,489 [INFO] Response Status Code: 400
+2025-03-09 21:21:59,489 [INFO] Response Headers: {'Content-Type': 'application/json', 'Content-Length': '158', 'Connection': 'keep-alive', 'Date': 'Sun, 09 Mar 2025 21:21:59 GMT', 'X-Powered-By': 'AT-5000', 'X-Twilio-Error-Code': '63007', 'Twilio-Concurrent-Requests': '1', 'Twilio-Request-Id': 'RQb3a24cb13888ae02e225fbcaa68eb1ed', 'Twilio-Request-Duration': '0.080', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Expose-Headers': 'ETag, Twilio-Request-Id', 'Access-Control-Allow-Credentials': 'true', 'X-Shenanigans': 'none', 'X-Cache': 'Error from cloudfront', 'Via': '1.1 0587d29bba1a416012edbf0b64a7e34c.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': 'gC2xWXf07W4rPKjAqzAu9tMRdILm9c9-_SzF4RDqhjIfexdwRsm6wQ=='}
+2025-03-09 21:30:09,367 [INFO] -- BEGIN Twilio API Request --
+2025-03-09 21:30:09,367 [INFO] POST Request: https://api.twilio.com/2010-04-01/Accounts/ACbcd2558df196c1765a7bedc63319e3c5/Messages.json
+2025-03-09 21:30:09,367 [INFO] Headers:
+2025-03-09 21:30:09,367 [INFO] Content-Type : application/x-www-form-urlencoded
+2025-03-09 21:30:09,367 [INFO] Accept : application/json
+2025-03-09 21:30:09,367 [INFO] User-Agent : twilio-python/9.4.6 (Linux x86_64) Python/3.12.3
+2025-03-09 21:30:09,367 [INFO] X-Twilio-Client : python-9.4.6
+2025-03-09 21:30:09,367 [INFO] Accept-Charset : utf-8
+2025-03-09 21:30:09,367 [INFO] -- END Twilio API Request --
+2025-03-09 21:30:10,984 [INFO] Response Status Code: 201
+2025-03-09 21:30:10,984 [INFO] Response Headers: {'Content-Type': 'application/json;charset=utf-8', 'Content-Length': '860', 'Connection': 'keep-alive', 'Date': 'Sun, 09 Mar 2025 21:30:10 GMT', 'X-Powered-By': 'AT-5000', 'Twilio-Concurrent-Requests': '1', 'Twilio-Request-Id': 'RQb2f1c4c0fa3da3c22dfae3a319918510', 'Twilio-Request-Duration': '0.124', 'X-Home-Region': 'us1', 'X-Api-Domain': 'api.twilio.com', 'Strict-Transport-Security': 'max-age=31536000', 'Access-Control-Allow-Origin': '*', 'Access-Control-Allow-Headers': 'Accept, Authorization, Content-Type, If-Match, If-Modified-Since, If-None-Match, If-Unmodified-Since, Idempotency-Key, X-Pre-Auth-Context, X-Target-Region', 'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS', 'Access-Control-Expose-Headers': 'ETag, Twilio-Request-Id', 'Access-Control-Allow-Credentials': 'true', 'X-Shenanigans': 'none', 'X-Cache': 'Miss from cloudfront', 'Via': '1.1 b0f8455cc4557d0eb768236b7fae9c06.cloudfront.net (CloudFront)', 'X-Amz-Cf-Pop': 'DEL54-P3', 'X-Amz-Cf-Id': 'pMRMXym-UqfNFpifZPFQmtuIhdEuOzIinLM-sB0ghk05JfLGh4vZZQ=='}
+2025-03-09 21:46:12,669 [INFO] Agent executor created successfully.
+2025-03-09 21:46:15,691 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 21:46:34,687 [INFO] Agent executor created successfully.
+2025-03-09 21:46:38,233 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 21:47:39,557 [INFO] Agent executor created successfully.
+2025-03-09 21:47:45,931 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 21:49:06,694 [INFO] Agent executor created successfully.
+2025-03-09 21:49:09,396 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 21:49:09,402 [INFO] lookup_doctor_or_appointment called with query: {"query": "available doctors"}
+2025-03-09 21:49:11,536 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 21:50:23,229 [INFO] Agent executor created successfully.
+2025-03-09 21:50:25,727 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 21:50:25,731 [INFO] lookup_doctor_or_appointment called with query: {"doctor": "Dr. Ram"}
+2025-03-09 21:50:29,881 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 21:50:32,373 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 21:51:46,057 [INFO] Agent executor created successfully.
+2025-03-09 21:51:50,695 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 21:51:52,737 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 21:52:30,893 [INFO] Agent executor created successfully.
+2025-03-09 21:52:36,655 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-09 21:52:38,966 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
