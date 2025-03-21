@@ -131,3 +131,190 @@
 2025-03-09 21:52:30,893 [INFO] Agent executor created successfully.
 2025-03-09 21:52:36,655 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
 2025-03-09 21:52:38,966 [INFO] HTTP Request: POST https://api.openai.com/v1/chat/completions "HTTP/1.1 200 OK"
+2025-03-21 11:33:56,876 [INFO] New session created with session_id: 46930d50-eaf5-4e99-8fd9-06c7aa4d657f
+2025-03-21 11:34:15,593 [INFO] Agent executor created successfully.
+2025-03-21 11:34:17,867 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:18,305 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:18,368 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:18,805 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:18,868 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:19,317 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:19,376 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:19,812 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:19,873 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:20,296 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:20,358 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:20,783 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:20,843 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:21,244 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:21,306 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:21,739 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:21,799 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:22,196 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:22,257 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:22,678 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:22,744 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:23,134 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:23,193 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:23,587 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:23,657 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:24,188 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:24,262 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:24,790 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:34:24,864 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:34:25,402 [INFO] lookup_doctor_or_appointment called with query: doctor
+2025-03-21 11:35:19,402 [INFO] Agent executor created successfully.
+2025-03-21 11:35:19,652 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:20,197 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:20,273 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:20,818 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:20,887 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:21,441 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:21,512 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:22,081 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:22,153 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:22,713 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:22,786 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:23,358 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:23,429 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:24,015 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:24,087 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:24,623 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:24,695 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:25,220 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:25,290 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:25,812 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:25,883 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:26,406 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:26,478 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:27,006 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:27,078 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:27,596 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:27,668 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:28,199 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:35:28,272 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:35:28,795 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:39:21,779 [INFO] New session created with session_id: d921c9f3-af32-496b-ad7d-6d4f9f37bd70
+2025-03-21 11:39:52,467 [INFO] Agent executor created successfully.
+2025-03-21 11:39:52,992 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:40:00,451 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
+2025-03-21 11:40:17,051 [INFO] New session created with session_id: fd3facae-5ca9-4af7-be52-70e523666288
+2025-03-21 11:40:33,674 [INFO] Agent executor created successfully.
+2025-03-21 11:40:33,807 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:40:36,087 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 401 Unauthorized"
+2025-03-21 11:42:43,243 [INFO] Agent executor created successfully.
+2025-03-21 11:42:43,409 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:42:47,410 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-21 11:42:50,308 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:42:51,211 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:42:52,601 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-21 11:42:53,230 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:42:54,155 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:42:55,585 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-21 11:42:56,137 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:42:57,093 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:42:58,814 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-21 11:42:59,370 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:00,358 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:01,640 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-21 11:43:02,193 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:03,167 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:04,574 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-21 11:43:05,138 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:06,136 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:07,507 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-21 11:43:08,063 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:09,087 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:10,894 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-21 11:43:11,446 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:12,475 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:12,993 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:43:13,063 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:13,589 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:43:13,661 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:14,178 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:43:14,251 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:14,770 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:43:14,845 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:15,359 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:43:15,430 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:15,961 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 11:43:16,033 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 11:43:16,550 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:02,819 [INFO] Agent executor created successfully.
+2025-03-21 12:00:04,618 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:07,231 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-21 12:00:09,668 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:10,277 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:11,443 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-21 12:00:12,021 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:12,943 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:14,025 [INFO] HTTP Request: POST https://api.openai.com/v1/embeddings "HTTP/1.1 200 OK"
+2025-03-21 12:00:14,625 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:15,458 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:15,825 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:15,884 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:16,235 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:16,290 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:16,664 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:16,722 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:17,148 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:17,205 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:17,579 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:17,636 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:18,005 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:18,062 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:18,438 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:18,494 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:18,870 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:18,931 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:19,308 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:19,366 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:19,733 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:19,794 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:20,203 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:00:20,257 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:00:20,643 [INFO] lookup_doctor_or_appointment called with query: Hello
+2025-03-21 12:12:49,611 [INFO] Agent executor created successfully.
+2025-03-21 12:12:50,788 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:23:00,186 [INFO] Agent executor created successfully.
+2025-03-21 12:23:03,515 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:23:05,148 [INFO] Agent executor created successfully.
+2025-03-21 12:23:05,297 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:23:06,821 [INFO] Agent executor created successfully.
+2025-03-21 12:23:06,962 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 12:23:29,603 [INFO] Agent executor created successfully.
+2025-03-21 12:23:29,955 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 13:39:53,851 [INFO] New session created with session_id: 80468d7b-e06a-411f-bd2e-a5759f5f8909
+2025-03-21 13:40:06,574 [INFO] Agent executor created successfully.
+2025-03-21 13:40:11,102 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 13:45:34,286 [INFO] Agent executor created successfully.
+2025-03-21 13:45:38,113 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 13:46:13,259 [INFO] Agent executor created successfully.
+2025-03-21 13:46:13,702 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 13:46:17,398 [ERROR] Error parsing appointment time: String does not contain a date: today
+2025-03-21 13:46:17,616 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 13:47:07,972 [INFO] Agent executor created successfully.
+2025-03-21 13:47:08,373 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 13:47:09,829 [INFO] lookup_doctor_or_appointment called with query: cardiologist
+2025-03-21 13:47:11,398 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 13:52:36,995 [INFO] Agent executor created successfully.
+2025-03-21 13:52:40,662 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 13:58:47,384 [INFO] Agent executor created successfully.
+2025-03-21 13:58:50,588 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 13:59:08,618 [INFO] Agent executor created successfully.
+2025-03-21 13:59:08,983 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 13:59:26,599 [INFO] Agent executor created successfully.
+2025-03-21 13:59:26,813 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 14:01:15,923 [INFO] Agent executor created successfully.
+2025-03-21 14:01:16,412 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 14:01:33,454 [INFO] Agent executor created successfully.
+2025-03-21 14:01:33,887 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 14:01:47,699 [INFO] Agent executor created successfully.
+2025-03-21 14:01:47,998 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 14:01:56,178 [INFO] Agent executor created successfully.
+2025-03-21 14:01:56,724 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 14:02:11,548 [INFO] Agent executor created successfully.
+2025-03-21 14:02:12,138 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
+2025-03-21 14:02:36,253 [INFO] Agent executor created successfully.
+2025-03-21 14:02:36,694 [INFO] HTTP Request: POST http://127.0.0.1:11434/api/generate "HTTP/1.1 200 OK"
