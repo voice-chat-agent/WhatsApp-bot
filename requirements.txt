@@ -1,0 +1,10 @@
+fastapi
+uvicorn
+langchain_openai
+langchain
+langchain_pinecone
+pymongo
+dotenv
+langchain_ollama
+twilio
+python-dotenv
