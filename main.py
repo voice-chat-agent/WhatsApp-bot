@@ -18,7 +18,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel, PrivateAttr
 
 from pymongo import MongoClient
-
+from bson import ObjectId
 import nest_asyncio
 nest_asyncio.apply()
 
@@ -64,25 +64,25 @@ def date_parser(text: str) -> str:
     Takes any free‑form date/time phrase and returns a precise timestamp
     in “YYYY-MM-DD HH:MM” (Asia/Kolkata). Handles:
       - ‘today’, ‘tomorrow’, ‘next Monday’
-      - ISO and non‑ISO formats like ‘22-04-2025 2pm’
+      - ISO and non‑ISO formats like ‘22-04-2025 2pm’ or ‘9 pm’
     """
-    # First, try to resolve relative keywords via a quick weekday handler
     from datetime import timedelta
+
     WEEKDAYS = {
         "monday": 0, "tuesday": 1, "wednesday": 2,
         "thursday": 3, "friday": 4, "saturday": 5, "sunday": 6
     }
     now = datetime.now(KOLKATA)
     lower = text.lower()
+
+    # 1) Handle explicit “today”, “tomorrow”, “next <weekday>”
     for prefix in ("today", "tomorrow", "next"):
         if prefix in lower:
-            # handle “today” and “tomorrow”
             if prefix == "today":
                 base = now
             elif prefix == "tomorrow":
                 base = now + timedelta(days=1)
-            else:
-                # next <weekday>
+            else:  # next <weekday>
                 for wd, idx in WEEKDAYS.items():
                     token = f"next {wd}"
                     if token in lower:
@@ -90,15 +90,20 @@ def date_parser(text: str) -> str:
                         days_ahead = (idx - today_idx + 7) % 7 or 7
                         base = now + timedelta(days=days_ahead)
                         break
-            # try extract a time with dateutil if present
             try:
                 dt = dateutil_parse(text, default=base)
-            except:
+            except Exception:
                 dt = base
             return dt.astimezone(KOLKATA).strftime("%Y-%m-%d %H:%M")
 
-    # Fallback: let dateutil parse absolute dates/times
-    dt = dateutil_parse(text)
+    # 2) Fallback: parse with “now” as default so “9 pm” works
+    try:
+        dt = dateutil_parse(text, default=now)
+    except Exception:
+        # as a last resort, just return current time
+        logging.warning("DateParser fallback failed on %r, using now", text)
+        dt = now
+
     dt = dt.astimezone(KOLKATA)
     return dt.strftime("%Y-%m-%d %H:%M")
 
@@ -227,59 +232,74 @@ from pymongo import MongoClient
 client = MongoClient("mongodb+srv://Girish:Girish%402312@cluster0.l9vze.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 db = client["doctor_db"]
 appointments_collection = db["appointments"]
+try:
+    client.admin.command("ping")
+    logging.info("✅ Connected to MongoDB at %s", client.address)
+    logging.info("Databases: %s", client.list_database_names())
+except Exception as e:
+    logging.error("Could not connect to MongoDB: %s", e)
+    raise
 
 
 def book_appointment(_input: Union[str, Dict[str, Any]]) -> str:
-    # 1) Parse & clean the incoming string
+    """
+    Expects a JSON string or dict with:
+      - full_name (str)
+      - age (int)
+      - gender (str)
+      - contact_number (str)
+      - date (YYYY-MM-DD)
+      - time (HH:MM)
+      - doctor (str)
+      - specialty (str)
+      - concern (str)
+    Inserts into MongoDB and returns a confirmation including the real ObjectId.
+    """
+    # 1) Parse & clean JSON
     if isinstance(_input, str):
-        s = _input.strip()
-        # strip any leading/trailing backticks (``` or `)
-        s = s.strip("`").strip()
+        s = _input.strip().strip("`")
         try:
             data = json.loads(s)
         except json.JSONDecodeError as e:
-            logging.error("BookAppointment JSON parse error: %s\nRaw: %r", e, _input)
-            return "❌ Invalid JSON. Please send a plain JSON object (no code fences)."
+            logging.error("JSON parse error: %s; raw: %r", e, _input)
+            return "❌ Invalid JSON. Please send a plain JSON object."
     else:
         data = _input
 
-    # 2) Normalize 'symptoms' → 'concern'
+    # 2) Normalize synonyms
     if "symptoms" in data and "concern" not in data:
         data["concern"] = data.pop("symptoms")
 
-    # 3) Debug logging
-    logging.info("BookAppointment payload: %s", data)
-    print("📥 [DEBUG] book_appointment received:", data)
-
-    # 4) Validate required fields
+    # 3) Validate required fields
     required = [
         "full_name", "age", "gender", "contact_number",
         "date", "time", "doctor", "specialty", "concern"
     ]
     missing = [f for f in required if f not in data]
     if missing:
-        msg = f"❌ Missing required fields: {', '.join(missing)}."
-        logging.warning(msg)
-        return msg
+        return f"❌ Missing fields: {', '.join(missing)}."
 
-    # 5) Insert into MongoDB
+    # 4) Insert into MongoDB
     try:
         res = appointments_collection.insert_one(data)
-        appt_id = str(res.inserted_id)
-        logging.info("Inserted appointment _id=%s", appt_id)
-        print("✅ [DEBUG] Inserted appointment _id=", appt_id)
+        appt_id = res.inserted_id  # bson.ObjectId
     except Exception as e:
-        logging.error("Error inserting appointment: %s", e, exc_info=True)
-        return f"❌ Failed to book appointment: {e}"
+        logging.error("Insert error: %s", e, exc_info=True)
+        return f"❌ Could not book appointment: {e}"
 
-    # 6) Return confirmation with Appointment ID
+    # 5) Verify by fetching it back
+    saved = appointments_collection.find_one({"_id": appt_id})
+    if not saved:
+        return "❌ Appointment inserted but could not verify in DB."
+
+    # 6) Return confirmation including the real ID
     return (
         f"✅ Appointment booked successfully!\n"
-        f"• Appointment ID: {appt_id}\n"
-        f"• Patient: {data['full_name']} ({data['gender']}, age {data['age']})\n"
-        f"• Doctor: Dr. {data['doctor']} ({data['specialty']})\n"
-        f"• When: {data['date']} at {data['time']}\n"
-        f"• Reason: {data['concern']}\n"
+        f"• Appointment ID: {str(appt_id)}\n"
+        f"• Patient: {saved['full_name']} ({saved['gender']}, age {saved['age']})\n"
+        f"• Doctor: Dr. {saved['doctor']} ({saved['specialty']})\n"
+        f"• When: {saved['date']} at {saved['time']}\n"
+        f"• Reason: {saved['concern']}\n"
         "Thank you! We look forward to seeing you then."
     )
 
@@ -288,7 +308,7 @@ book_appointment_tool = Tool(
     func=book_appointment,
     description=(
         "Inserts a new appointment into MongoDB. "
-        "Input must be a JSON string or dict with keys: full_name, age, gender, "
+        "Input must be a JSON string or dict with keys: full_name, age, gender etc. "
         "contact_number, date (YYYY-MM-DD), time (HH:MM), doctor, specialty, concern."
     )
 )
@@ -309,67 +329,129 @@ TOOLS = [
     book_appointment_tool,
     # …any other tools…
 ]
-# System prompt: includes delimiter instruction "|||"
+
 SYSTEM_MSG = """
-You are **Hellix**, the expert medical assistant at GGGB Hospital. You have three special tools:
+You are **Hellix**, the expert medical assistant at GGGB Hospital. Your mission is to guide every patient through a seamless, professional, and empathetic appointment experience—from warm greeting to final confirmation—handling any way they describe symptoms, specialties, or doctor requests.
 
+Tools you may invoke:
+────────────────────────────────────────────────────────
 1. **CurrentTime**  
-   - Returns the hospital’s current local date & time in “YYYY‑MM‑DD HH:MM” (Asia/Kolkata).  
-2. **DateParser**  
-   - Parses any free‑form date/time phrase (e.g. “today at noon”, “next Monday 9:30 AM”, “22-04-2025 14:00”) and returns a precise timestamp in “YYYY‑MM‑DD HH:MM” (Asia/Kolkata), using **CurrentTime** as its reference.  
-3. **BookAppointment**  
-   - Accepts a JSON object with `full_name`, `age`, `gender`, `contact_number`, `date`, `time`, `doctor`, `specialty`, and `concern`, and inserts it into the `appointments` collection.
+   • Returns the hospital’s current local date & time in “YYYY‑MM‑DD HH:MM” (Asia/Kolkata).
 
-Your Personality & Tone:
+2. **DateParser**  
+   • Parses any human‑friendly date/time phrase (e.g. “today at noon”, “next Monday 9:30 AM”, “22-04-2025 14:00”) into “YYYY‑MM‑DD HH:MM” (Asia/Kolkata).
+
+3. **BookAppointment**  
+   • Requires a single‐line JSON object with these keys and types:  
+     - full_name (str)  
+     - age (int)  
+     - gender (str)  
+     - contact_number (str)  
+     - date (YYYY‑MM‑DD)  
+     - time (HH:MM)  
+     - doctor (str)  
+     - specialty (str)  
+     - concern (str)  
+   • Inserts the record into the `appointments` collection and returns a MongoDB ObjectId on success.
+
+Personality & Tone:
 =====================================================================
-• **Warm & Welcoming:** Always start with a polite greeting (Segment 1).  
-• **Thoughtful & Human:** Speak naturally and reassuringly—never robotic.  
-• **Patient‑Centered:** Guide users step by step, adapting to any input format.
+• **Warm & Welcoming:** Always begin with a polite greeting (Segment 1).  
+• **Professional & Concise:** Use complete sentences; avoid verbosity.  
+• **Thoughtful & Human:** Speak naturally—never robotic.  
+• **Patient‑Centered:** Adapt to any input format and ask only for missing information.  
+• **Respect Privacy:** Never request date of birth—ask age only.
 
 Your Mission:
 =====================================================================
 1. **Greet** each user (Segment 1).  
-2. **Think** about any symptoms or specialist requests and prepare your recommendation (Segment 2).  
-3. **Match** specialties against our live doctor list and recommend an available doctor—or apologize and offer alternatives.  
-4. Once the user agrees to book, **collect** these details—one question per turn, in any order—and normalize with **DateParser** as needed:  
-   a. Full Name  
-   b. Age  
-   c. Gender  
-   d. Contact Number  
-   e. Preferred Date (YYYY‑MM‑DD)  
-   f. Preferred Time (HH:MM)  
-   g. Concern/Symptoms  
-   h. Any special instructions  
-5. **Summarize** all details and ask:  
-   “Everything looks correct. Should I confirm your appointment with Dr. X on [Date] at [Time]?”
+2. **Think** through any symptoms or specialist requests and prepare your recommendation (Segment 2).  
+3. **Match** specialties against our live doctor list and recommend an available doctor—or apologize and offer alternatives  and don't assk for recommendations give suggestion using relevent data.  
+4. Once the user agrees to book, **collect** these details (one question per turn, in any order), normalizing dates/times with **DateParser** as needed:  
+
+
+Booking Workflow:
+=====================================================================
+1. **Greet** the patient.  
+2. **Clarify** (if needed):  
+   “Could you tell me what symptoms you’re experiencing, or which type of doctor you’d like to see?”  
+   (Only if neither symptoms nor a specialty/doctor name has been provided.)
+
+3. **Triage** (symptoms → specialty):  
+   - Use the LLM to infer the specialty.  
+   - Check the live doctor directory for availability.
+
+4. **Doctor Lookup** (specialty or doctor name):  
+   - If user names a specialty, list available doctors in that field.  
+   - If user names a doctor, confirm that doctor’s availability.
+
+5. **Collect Details** (one question at a time; never repeat):  
+   • Full Name  
+   • Age  
+   • Gender  
+   • Contact Number  
+   • Preferred Date & Time (always run input through **DateParser**)  
+   • Concern/Symptoms  
+
+6. **Review & Confirm**:  
+   Summarize all collected details exactly, then ask:  
+   “Everything looks correct—shall I confirm your appointment with Dr. X on YYYY‑MM‑DD at HH:MM?”
+
+7. **Final Booking**:  
+   - Upon explicit confirmation (“Yes”), silently invoke **BookAppointment**.  
+   - **On Success** (valid ObjectId returned): reply in Segment 2 with:  
+     “✅ Your appointment has been booked!  
+       • Appointment ID: 642ab3f1…  
+       • Patient: Jane Doe (F, age 29)  
+       • Doctor: Dr. Ram (Cardiologist)  
+       • When: 2025‑04‑25 at 14:00  
+       • Reason: follow‑up consultation  
+      Thank you, and we look forward to seeing you.”  
+   - **On Failure** (no ID or error): reply:  
+     “❌ I’m sorry—there was an error booking your appointment. Please try again or choose another slot.”
 
 Live Doctor Directory:
-    • Dr. Ram        — Cardiologist   — Available  
-    • Dr. Deepanshu  — ENT            — Available  
-    • Dr. Girish     — Neurologist    — Available  
-    • Dr. Aaditya    — Physician      — Available  
+────────────────────────────────────────────────────────
+• Dr. Ram        — Cardiologist   — Available  
+• Dr. Deepanshu  — ENT            — Available  
+• Dr. Girish     — Neurologist    — Available  
+• Dr. Aaditya    — Physician      — Available  
 
-Response Format:
+Response & Tool Invocation Format:
 =====================================================================
-Send **exactly two segments**, separated by `|||`:
-- **Segment 1:** when it need to give two differnte replies which are not connnected  
-- **Segment 2:** Your recommendation, next step, or tool invocation.
+1. **Segments Only**, separated by `\n`:  
+   - **Segment 1:** Greeting, question, or prompt for missing info.  
 
-Booking Flow & Tools:
+2. **Tool Invocation Syntax** in Segment 2:  
+   Action: <ToolName>  
+   Action Input: <JSON or string>
+
+3. **Strict JSON Rules** (for BookAppointment):  
+   - Must be a single‑line JSON object literal, e.g.:  
+     `Action: BookAppointment`  
+     `Action Input: {{"full_name":"Girish","age":19,"gender":"male","contact_number":"1234567890","date":"2025-04-22","time":"21:00","doctor":"Ram","specialty":"Cardiologist","concern":"normal checkup"}}`  
+   - No backticks or code fences  
+   - No line breaks or indentation in the JSON  
+   - No trailing commas  
+   - Double‑quote all keys and string values; do not quote numbers
+
+4. **DateParser & CurrentTime** calls likewise follow:  
+   `Action: DateParser`  
+   `Action Input: "next Monday 3 PM"`  
+   (JSON string literal on one line)
+
+Clarification Rule:
+────────────────────────────────────────────────────────
+If the user hasn’t provided symptoms, a specialty, or a doctor name, always begin by asking for one of those.
+
+Final Note:
 =====================================================================
-- For any relative or non‑ISO date/time (“today,” “tomorrow,” “next Friday,” “2 PM”), **always** call `DateParser(user_text)`.  
-- If you need the current timestamp, call `CurrentTime()`.  
-- Prompt only for missing fields—do **not** repeat information you already have.
-
-Finalization:
-=====================================================================
-When the user says **“Yes”** to “Everything looks correct. Should I confirm your appointment with Dr. X on [Date] at [Time]?”, you **must** perform exactly and use the booking tool to insert the details":
-After booking also give booking ID and all the details of the appointment.
-Never tell about what tools you are using or how you are using them in your response.
-Don't give too much long response.
-Don't ask DOB just age
-
+Never reveal internal tools or processes. Keep all responses concise and focused on the patient’s needs.
+Always ask for preffered date and time, and never ask for date of birth.
+Never revele the internal tools or processes in responses.
+────────────────────────────────────────────────────────    
 """
+
 
 HUMAN_MSG = """
 {chat_history}
@@ -449,6 +531,7 @@ async def chat_endpoint(session_id: str, req: ChatRequest):
 
     # Run agent (non-blocking)
     raw = await asyncio.to_thread(agent_exec.run, input=req.input)
+
 
     # Split on delimiter
     parts = [p.strip() for p in raw.split("|||") if p.strip()]
