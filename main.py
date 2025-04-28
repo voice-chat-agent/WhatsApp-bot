@@ -21,12 +21,20 @@ from pymongo import MongoClient
 from bson import ObjectId
 import nest_asyncio
 nest_asyncio.apply()
+from typing import Union, Dict, Any
+import json
+import logging
+from pymongo import MongoClient
+from services.twilio_service import send_whatsapp_message
 
 from datetime import datetime
 from dateutil.parser import parse as dateutil_parse
 from dateutil.tz import gettz
 from langchain.agents import Tool
 
+# main.py (or a new router)
+from fastapi import Request, Response
+from twilio.twiml.messaging_response import MessagingResponse
 
 import json
 from typing import Union, Dict, Any
@@ -240,7 +248,6 @@ except Exception as e:
     logging.error("Could not connect to MongoDB: %s", e)
     raise
 
-
 def book_appointment(_input: Union[str, Dict[str, Any]]) -> str:
     """
     Expects a JSON string or dict with:
@@ -253,7 +260,7 @@ def book_appointment(_input: Union[str, Dict[str, Any]]) -> str:
       - doctor (str)
       - specialty (str)
       - concern (str)
-    Inserts into MongoDB and returns a confirmation including the real ObjectId.
+    Inserts into MongoDB, sends a WhatsApp confirmation, and returns a confirmation string.
     """
     # 1) Parse & clean JSON
     if isinstance(_input, str):
@@ -282,7 +289,7 @@ def book_appointment(_input: Union[str, Dict[str, Any]]) -> str:
     # 4) Insert into MongoDB
     try:
         res = appointments_collection.insert_one(data)
-        appt_id = res.inserted_id  # bson.ObjectId
+        appt_id = res.inserted_id
     except Exception as e:
         logging.error("Insert error: %s", e, exc_info=True)
         return f"❌ Could not book appointment: {e}"
@@ -292,16 +299,90 @@ def book_appointment(_input: Union[str, Dict[str, Any]]) -> str:
     if not saved:
         return "❌ Appointment inserted but could not verify in DB."
 
-    # 6) Return confirmation including the real ID
-    return (
+    # 6) Build confirmation text
+    confirmation_text = (
         f"✅ Appointment booked successfully!\n"
-        f"• Appointment ID: {str(appt_id)}\n"
+        f"• Appointment ID: {str(appt_id)}\n"
         f"• Patient: {saved['full_name']} ({saved['gender']}, age {saved['age']})\n"
         f"• Doctor: Dr. {saved['doctor']} ({saved['specialty']})\n"
         f"• When: {saved['date']} at {saved['time']}\n"
-        f"• Reason: {saved['concern']}\n"
-        "Thank you! We look forward to seeing you then."
+        f"• Reason: {saved['concern']}"
     )
+
+    # 7) Send WhatsApp confirmation
+    try:
+        sid = send_whatsapp_message(
+            to=f"whatsapp:{saved['contact_number']}",
+            body=confirmation_text
+        )
+        logging.info("WhatsApp confirmation sent, SID=%s", sid)
+    except Exception as e:
+        logging.error("Failed to send WhatsApp message: %s", e)
+
+    # 8) Return to the API caller
+    return f"{confirmation_text}\nThank you! We look forward to seeing you then."
+
+# def book_appointment(_input: Union[str, Dict[str, Any]]) -> str:
+#     """
+#     Expects a JSON string or dict with:
+#       - full_name (str)
+#       - age (int)
+#       - gender (str)
+#       - contact_number (str)
+#       - date (YYYY-MM-DD)
+#       - time (HH:MM)
+#       - doctor (str)
+#       - specialty (str)
+#       - concern (str)
+#     Inserts into MongoDB and returns a confirmation including the real ObjectId.
+#     """
+#     # 1) Parse & clean JSON
+#     if isinstance(_input, str):
+#         s = _input.strip().strip("`")
+#         try:
+#             data = json.loads(s)
+#         except json.JSONDecodeError as e:
+#             logging.error("JSON parse error: %s; raw: %r", e, _input)
+#             return "❌ Invalid JSON. Please send a plain JSON object."
+#     else:
+#         data = _input
+
+#     # 2) Normalize synonyms
+#     if "symptoms" in data and "concern" not in data:
+#         data["concern"] = data.pop("symptoms")
+
+#     # 3) Validate required fields
+#     required = [
+#         "full_name", "age", "gender", "contact_number",
+#         "date", "time", "doctor", "specialty", "concern"
+#     ]
+#     missing = [f for f in required if f not in data]
+#     if missing:
+#         return f"❌ Missing fields: {', '.join(missing)}."
+
+#     # 4) Insert into MongoDB
+#     try:
+#         res = appointments_collection.insert_one(data)
+#         appt_id = res.inserted_id  # bson.ObjectId
+#     except Exception as e:
+#         logging.error("Insert error: %s", e, exc_info=True)
+#         return f"❌ Could not book appointment: {e}"
+
+#     # 5) Verify by fetching it back
+#     saved = appointments_collection.find_one({"_id": appt_id})
+#     if not saved:
+#         return "❌ Appointment inserted but could not verify in DB."
+
+#     # 6) Return confirmation including the real ID
+#     return (
+#         f"✅ Appointment booked successfully!\n"
+#         f"• Appointment ID: {str(appt_id)}\n"
+#         f"• Patient: {saved['full_name']} ({saved['gender']}, age {saved['age']})\n"
+#         f"• Doctor: Dr. {saved['doctor']} ({saved['specialty']})\n"
+#         f"• When: {saved['date']} at {saved['time']}\n"
+#         f"• Reason: {saved['concern']}\n"
+#         "Thank you! We look forward to seeing you then."
+#     )
 
 book_appointment_tool = Tool(
     name="BookAppointment",
@@ -509,6 +590,27 @@ async def new_session():
     sid = str(uuid.uuid4())
     session_histories[sid] = []
     return {"session_id": sid}
+
+@app.post("/whatsapp-webhook")
+async def whatsapp_webhook(request: Request):
+    form = await request.form()
+    from_number = form.get("From")      # e.g. "whatsapp:+91XXXXXXXXXX"
+    incoming = form.get("Body") or ""
+
+    # 1. Pass user message into your agent
+    agent_resp = await asyncio.to_thread(app.state.agent_executor.run, input=incoming)
+
+    # 2. Extract the text you want to send back
+    #    (assuming the agent returns plain text)
+    reply = agent_resp.strip()
+
+    # 3. Build a TwiML response
+    twiml = MessagingResponse()
+    twiml.message(body=reply)
+
+    # 4. Return as XML
+    return Response(content=str(twiml), media_type="application/xml")
+
 
 @app.post("/chat/{session_id}", response_model=ChatResponse)
 async def chat_endpoint(session_id: str, req: ChatRequest):
