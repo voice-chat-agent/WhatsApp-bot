@@ -32,6 +32,14 @@ from dateutil.parser import parse as dateutil_parse
 from dateutil.tz import gettz
 from langchain.agents import Tool
 
+from langchain.llms.base import LLM
+from google import genai
+from google.genai.errors import ServerError
+import time, logging
+from pydantic import PrivateAttr
+from typing import Optional, List
+
+
 # main.py (or a new router)
 from fastapi import Request, Response
 from twilio.twiml.messaging_response import MessagingResponse
@@ -169,30 +177,36 @@ from langchain.llms.base import LLM
 from google import genai
 
 class GoogleGenAI(LLM):
-    model_name: str = "gemini-2.0-flash"
-    temperature: float = 0.7
-    _api_key: str     = PrivateAttr()
+    model_name: str
+    temperature: float
+    _api_key: str         = PrivateAttr()
     _client: genai.Client = PrivateAttr()
 
     def __init__(self, model_name: str, temperature: float, api_key: str):
-        super().__init__()
-        self.model_name  = model_name
-        self.temperature = temperature
-        self._api_key    = api_key
-        self._client     = genai.Client(api_key=self._api_key)
-        logging.info("GoogleGenAI initialized with %s", self.model_name)
+        # Pass required fields to Pydantic
+        super().__init__(model_name=model_name, temperature=temperature)
+        self._api_key = api_key
+        self._client  = genai.Client(api_key=self._api_key)
+        logging.info("GoogleGenAI initialized with %s at temperature %s", 
+                     self.model_name, self.temperature)
 
     def _call(self, prompt: str, stop: Optional[List[str]] = None) -> str:
-        resp = self._client.models.generate_content(
-            model=self.model_name,
-            contents=prompt
-        )
-        return resp.text
+        for attempt in range(3):
+            try:
+                resp = self._client.models.generate_content(
+                    model=self.model_name,
+                    contents=prompt
+                )
+                return resp.text
+            except ServerError as e:
+                logging.warning(f"GenAI overloaded (attempt {attempt+1}/3): {e}")
+                time.sleep(2 ** attempt)
+        logging.error("GenAI still unavailable after retries")
+        return "❌ Sorry, I'm temporarily unable to process that. Please try again shortly."
 
     @property
     def _llm_type(self) -> str:
         return "google_genai"
-
 # ───────────────────────────────────────────────────
 # LangChain Agent Setup
 # ───────────────────────────────────────────────────
@@ -263,6 +277,58 @@ def extract_id(raw: str) -> str | None:
     """Find the first 24-hex sequence in the input."""
     m = HEX24.search(raw)
     return m.group(0) if m else None
+
+import re
+
+import re
+
+import re
+
+import re
+import logging
+
+def check_doctor_availability(raw_input: str) -> str:
+    """
+    If raw_input refers to a doctor name (“Dr. Ram” or “Ram”),
+    returns “Dr. Ram is currently available/unavailable.”
+    If raw_input refers to a specialty (“cardiologist”),
+    returns all available doctors in that specialty.
+    Otherwise, apologizes that nothing was found.
+    """
+    # 1) Clean off any “Dr.” prefix
+    clean = re.sub(r'^dr\.?\s+', '', raw_input, flags=re.IGNORECASE).strip()
+    logging.debug(f"Checking availability for cleaned input: '{clean}'")
+
+    # 2) Try exact name match (case-insensitive)
+    doc = doctors_collection.find_one({
+        "name": {"$regex": f"^{re.escape(clean)}$", "$options": "i"}
+    })
+    if doc:
+        status = "available" if doc.get("availability", False) else "unavailable"
+        return f"Dr. {doc['name']} is currently {status}."
+
+    # 3) No name match → try specialty lookup
+    specs = list(doctors_collection.find({
+        "specialty": {"$regex": f"^{re.escape(clean)}$", "$options": "i"},
+        "availability": True
+    }, {"name": 1, "_id": 0}))
+    if specs:
+        names = [d["name"] for d in specs]
+        lines = "\n".join(f"• Dr. {n}" for n in names)
+        return f"Available {clean.title()} doctors:\n{lines}"
+
+    # 4) Nothing found
+    return f"❌ I couldn’t find any Dr. {clean} or any {clean.title()} specialists in our directory."
+
+check_avail_tool = Tool(
+    name="CheckDoctorAvailability",
+    func=check_doctor_availability,
+    description=(
+        "Given a doctor’s name, returns exactly whether that doctor is available or unavailable, "
+        "or an error if the name isn’t found."
+    )
+)
+
 
 def fetch_appointment(_input: str) -> str:
     raw = str(_input)
@@ -501,10 +567,10 @@ TOOLS = [
     faq_tool,
     current_time_tool,
     date_parser_tool,
+    check_avail_tool,           # ← new
     book_appointment_tool,
     fetch_appointment_tool,
     cancel_appointment_tool
-    # …any other tools…
 ]
 
 SYSTEM_MSG = """
@@ -541,6 +607,10 @@ Tools you may invoke:
     - If they answer “no,” say:
         “No problem! Your appointment is still active. Let us know if you need anything else.”
 
+5. **CheckDoctorAvailability**  
+   • Given a doctor’s name (or a specialty), returns exactly whether that doctor/specialty is available, unavailable, or not found.
+    • Use this to check availability before booking.
+
 Personality & Tone:
 =====================================================================
 • **Warm & Welcoming:** Always begin with a polite greeting (Segment 1).  
@@ -566,11 +636,7 @@ Booking Workflow:
 
 3. **Triage** (symptoms → specialty):  
    - Use the LLM to infer the specialty.  
-   - Check the live doctor directory for availability.
-
-4. **Doctor Lookup** (specialty or doctor name):  
-   - If user names a specialty, list available doctors in that field.  
-   - If user names a doctor, confirm that doctor’s availability.
+   - Invoke **CheckDoctorAvailability** with the inferred specialty (or doctor name) to confirm availability.
 
 5. **Collect Details** (one question at a time; never repeat):  
    • Full Name  
@@ -599,12 +665,27 @@ Booking Workflow:
 
 Live Doctor Directory:
 ────────────────────────────────────────────────────────
-• Dr. Ram — Cardiologist — Available
-• Dr. Deepanshu — ENT — Available
-• Dr. Girish — Neurologist — Available
-• Dr. Aaditya — Physician — Available
-• Dr. Ravi — Neurologist — Not Available
-• Dr. Pooja — Orthopedic — Not Available
+After getting the doctor name Invoke **CheckDoctorAvailability** with the inferred specialty (or doctor name) to confirm availability.
+• Dr. Ram — Cardiologist 
+• Dr. Deepanshu — ENT 
+• Dr. Girish — Neurologist 
+• Dr. Aaditya — Physician 
+• Dr. Neha — Dermatologist 
+• Dr. Kavita — Gynecologist 
+• Dr. Rohan — Orthopedic 
+• Dr. Meera — Psychiatrist 
+• Dr. Anil — Oncologist 
+• Dr. Tanvi — Pediatrician 
+• Dr. Siddharth — Urologist 
+• Dr. Ritika — Endocrinologist 
+• Dr. Abhinav — Gastroenterologist 
+• Dr. Swati — Pulmonologist 
+• Dr. Nikhil — Nephrologist 
+• Dr. Ishita — Rheumatologist 
+• Dr. Varun — Ophthalmologist 
+• Dr. Sneha — Pathologist 
+• Dr. Manav — Radiologist 
+• Dr. Alka — Anesthesiologist 
 
 Response & Tool Invocation Format:
 =====================================================================
@@ -635,10 +716,11 @@ If the user hasn’t provided symptoms, a specialty, or a doctor name, always be
 
 Final Note:
 =====================================================================
-Never reveal internal tools or processes in responses.
+Never reveal internal tools or processes. Keep all responses concise and focused on the patient’s needs.
 Always ask for preffered date and time, and never ask for date of birth.
 Never revele the internal tools or processes in responses.
 If user ask for appointment has booked or not give confirmation message again with all details again.
+When you suggest speciaist alwasy give the name of doctor and specialty and also tell their availability.
 ────────────────────────────────────────────────────────    
 """
 
