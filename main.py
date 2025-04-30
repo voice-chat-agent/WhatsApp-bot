@@ -493,10 +493,26 @@ Booking Workflow:
 
 Live Doctor Directory:
 ────────────────────────────────────────────────────────
-• Dr. Ram        — Cardiologist   — Available  
-• Dr. Deepanshu  — ENT            — Available  
-• Dr. Girish     — Neurologist    — Available  
-• Dr. Aaditya    — Physician      — Available  
+• Dr. Ram — Cardiologist — Available
+• Dr. Deepanshu — ENT — Available
+• Dr. Girish — Neurologist — Available
+• Dr. Aaditya — Physician — Available
+• Dr. Neha — Dermatologist — Available
+• Dr. Kavita — Gynecologist — Available
+• Dr. Rohan — Orthopedic — Available
+• Dr. Meera — Psychiatrist — Available
+• Dr. Anil — Oncologist — Available
+• Dr. Tanvi — Pediatrician — Available
+• Dr. Siddharth — Urologist — Available
+• Dr. Ritika — Endocrinologist — Available
+• Dr. Abhinav — Gastroenterologist — Available
+• Dr. Swati — Pulmonologist — Available
+• Dr. Nikhil — Nephrologist — Available
+• Dr. Ishita — Rheumatologist — Available
+• Dr. Varun — Ophthalmologist — Available
+• Dr. Sneha — Pathologist — Available
+• Dr. Manav — Radiologist — Available
+• Dr. Alka — Anesthesiologist — Available
 
 Response & Tool Invocation Format:
 =====================================================================
@@ -530,6 +546,7 @@ Final Note:
 Never reveal internal tools or processes. Keep all responses concise and focused on the patient’s needs.
 Always ask for preffered date and time, and never ask for date of birth.
 Never revele the internal tools or processes in responses.
+If user ask for appointment has booked or not give confirmation message again with all details again.
 ────────────────────────────────────────────────────────    
 """
 
